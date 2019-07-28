@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Orbit Simulator</title>
+    <style>
+      body {
+        background-color: rgb(110, 110, 150);
+      }
+      #mybox {
+        display: grid;
+        grid-template-columns: 640px 260px;
+        grid-template-rows: auto auto;
+        grid-template-areas:
+        "canvas params"
+        "results params";
+      }
+      #mycanv {
+        grid-area: canvas;
+        width: 600px;
+        height: 600px;
+      }
+      #input-params {
+        grid-area: params;
+        border: 1px solid #333;
+        margin-left: 10px;
+        padding: 0 10px 10px 10px;
+      }
+      #results {
+        grid-area: results;
+      }
+      #makecircvx {
+        font-size: 0.85em;
+      }
+      h1, h2, h3 {
+        text-decoration: underline;
+      }
+      input {
+        background-color: rgb(140, 140, 180);
+        padding: 8px;
+        border: 1px solid rgb(90, 90, 130);
+        border-radius: 5px;
+      }
+      table {
+        border-collapse: collapse;
+        border: 2px solid rgb(90, 90, 130);
+        letter-spacing: 1px;
+        font-size: 0.8rem;
+      }
+      td {
+        padding: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Orbit Simulator</h1>
+    <div id="mybox">
+      <canvas id="mycanv" width="600" height="600"></canvas>
+      <div id="input-params">
+        <h2>Parameters</h2>
+        <h3>Sim:</h3>
+        <table>
+          <tr>
+            <td>dt:</td>
+            <td><input type="text" id="in-dt" size="10" value="10" /></td>
+          </tr>
+          <tr>
+            <td>n steps:</td>
+            <td><input type="text" id="in-nsteps" size="10" value="5000" /></td>
+          </tr>
+          <tr>
+            <td>zoom:</td>
+            <td><input type="text" id="in-zoom" size="10" value="0.02" /></td>
+          </tr>
+          <tr>
+            <td>integration<br> method:</td>
+            <td>
+              <input type="radio" id="in-euler" class="method" name="in-method" value="euler" checked>Euler<br>
+              <input type="radio" id="in-verlet" class="method" name="in-method" value="verlet">Verlet<br>
+              <input type="radio" id="in-both" class="method" name="in-method" value="both">Both
+            </td>
+          </tr>
+        </table>
+        <h3>Planet:</h3>
+        <table>
+          <tr>
+            <td>radius:</td>
+            <td><input type="text" id="in-rpl" size="10" value="5000" /></td>
+          </tr>
+          <tr>
+            <td>density:</td>
+            <td><input type="text" id="in-dens" size="10" value="5100" /></td>
+          </tr>
+        </table>
+        <h3>Spaceship:</h3>
+        <table>
+          <tr>
+            <td>s0 x:</td>
+            <td><input type="text" id="in-s0x" size="10" value="0" /></td>
+          </tr>
+          <tr>
+            <td>s0 y:</td>
+            <td><input type="text" id="in-s0y" size="10" value="6000" /></td>
+          </tr>
+          <tr>
+            <td>v0 x:</td>
+            <td><input type="text" id="in-v0x" size="10" value="6.5" />
+            <button id="makecircvx" onclick="makeCircVx();">Calc. circ vx*</button></td>
+          </tr>
+          <tr>
+            <td>v0 y:</td>
+            <td><input type="text" id="in-v0y" size="10" value="1" /></td>
+          </tr>
+          <tr>
+            <td>a pro-/<br>retrograde:</td>
+            <td><input type="text" id="in-aprog" size="10" value="-0.0001" /></td>
+          </tr>
+        </table>
+        <button onclick="run();">Run</button>
+      </div>
+      <div id="results">
+        <h2>Results</h2>
+        <h3>Orbit:</h3>
+        <table>
+          <tr>
+            <td>vx, vy:</td>
+            <td id="res-vxvy"></td>
+          </tr>
+        </table>
+      </div>
+      <small>* Calculates and sets v0 x for a circular orbit, using s0 y as
+        radius and assuming s0 x = 0.</small>
+    </div>
+    <script src="landing-sim.js"></script>
+  </body>
+</html>

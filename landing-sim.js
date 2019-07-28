@@ -39,6 +39,10 @@ const r_spaceship = 1;
 const canvas = document.getElementById("mycanv");
 const ctx = canvas.getContext('2d');
 
+let pauseAfterLandingCheckbox = document.querySelector('#pauseAfterLanding');
+let pauseAfterLanding = pauseAfterLandingCheckbox.checked;
+pauseAfterLandingCheckbox.addEventListener('change', evt => { pauseAfterLanding = evt.target.checked; });
+
 function draw_fixed() {
   // draw the canvas and csys
   ctx.fillStyle = 'rgb(0, 0, 0)';
@@ -156,6 +160,10 @@ function runEuler() {
     s0_x = s1_x;
     s0_y = s1_y;
     checkStatus(s0_x, s0_y);
+
+    if(landed === true && pauseAfterLanding === true){
+      return;
+    }
   }
 }
 //draw_vector(s0_x, s0_y, s0_x + aG_x*4E5, s0_y + aG_y*4E5);
@@ -186,6 +194,10 @@ function runVerlet() {
     s1_x = s2_x;
     s1_y = s2_y;
     checkStatus(s2_x, s2_y);
+
+    if(landed === true && pauseAfterLanding === true){
+      return;
+    }
   }
 }
 

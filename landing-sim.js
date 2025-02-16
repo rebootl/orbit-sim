@@ -225,6 +225,12 @@ function makeCircVx() {
   document.getElementById('in-v0x').value = vx_circ;
 }
 
+function makeEscapeVx() {
+  get_data();
+  const vx_esc = Math.sqrt((2*G*m_pl)/s0_y);
+  document.getElementById('in-v0x').value = vx_esc;
+}
+
 function clear() {
   get_data();
   draw_fixed();
